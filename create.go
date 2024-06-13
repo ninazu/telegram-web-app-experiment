@@ -11,6 +11,7 @@ import (
 
 var botToken = flag.String("token", "", "Bot Token")
 var chatId = flag.Int64("chat", -1002200729105, "Bot Token")
+var botName = flag.String("chat", "kormy6hkaBot", "Bot Token")
 
 type ParseMode string
 
@@ -35,7 +36,7 @@ func send(title string, id string) error {
 				{
 					{
 						"text": title + ":" + id,
-						"url":  "https://t.me/kormy6hkaBot/shop?startapp=" + id,
+						"url":  fmt.Sprintf("https://t.me/%s/shop?startapp=%s", *botName, id),
 					},
 				},
 			},
