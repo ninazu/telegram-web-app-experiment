@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 )
 
 var botToken = flag.String("token", "", "Bot Token")
@@ -36,7 +37,7 @@ func send(image, title string, id string) error {
 				{
 					{
 						"text": title + ":" + id,
-						"url":  fmt.Sprintf("https://t.me/%s/shop?startapp=%s", *botName, id),
+						"url":  fmt.Sprintf("https://t.me/%s/shop?id=%s&name=%s", *botName, id, url.QueryEscape(title)),
 					},
 				},
 			},
@@ -85,5 +86,7 @@ func main() {
 	if err := send("https://eimg.pravda.com/images/doc/2/1/2106f80-cherry-1566779.jpg", "Черешня - Жовта", "1"); err != nil {
 		panic(err)
 	}
-	//send("Персик")
+	//if err := send("https://beautyseason.ru/upload/iblock/371/325gbduwwkdko0hbu0bqcjqxa4jfvcks.jpg", "Персик", "2"); err != nil {
+	//		panic(err)
+	//	}
 }

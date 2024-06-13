@@ -178,8 +178,9 @@
 
         Telegram.WebApp.ready();
 
-        let startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        addItem(startParam);
+        let dlId = Telegram.WebApp.initDataUnsafe.id;
+        let dlName = Telegram.WebApp.initDataUnsafe.name;
+        addItem(dlName);
 
         Telegram.WebApp.MainButton.setParams({
             text: 'Завершити замовлення',
