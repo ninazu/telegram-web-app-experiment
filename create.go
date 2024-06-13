@@ -2,12 +2,12 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 )
 
 var botToken = flag.String("token", "", "Bot Token")
@@ -28,6 +28,11 @@ type ErrorResponse struct {
 }
 
 func send(image, title string, id string) error {
+	raw, _ := json.Marshal(map[string]any{
+		"id":    id,
+		"title": title,
+	})
+
 	body, err := json.Marshal(map[string]any{
 		//"parse_mode": ModeHTML,
 		"text":    image,
@@ -37,7 +42,7 @@ func send(image, title string, id string) error {
 				{
 					{
 						"text": title,
-						"url":  fmt.Sprintf("https://t.me/%s/shop?id=%s&name=%s", *botName, id, url.QueryEscape(title)),
+						"url":  fmt.Sprintf("https://t.me/%s/shop?startapp=%s", *botName, base64.URLEncoding.EncodeToString(raw)),
 					},
 				},
 			},
