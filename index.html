@@ -82,7 +82,7 @@
     const checkout = document.getElementById('checkout');
 
     function addItem(title) {
-        if (title === "") {
+        if (title === "" || title === undefined) {
             console.warn("EMPTY link");
 
             return
