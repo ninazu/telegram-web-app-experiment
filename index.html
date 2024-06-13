@@ -10,6 +10,7 @@
         function setThemeClass() {
             document.documentElement.className = Telegram.WebApp.colorScheme;
         }
+
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
     </script>
@@ -81,6 +82,11 @@
     const checkout = document.getElementById('checkout');
 
     function addItem(title) {
+        if (title === "") {
+            return
+        }
+
+
         const labelElm = document.createElement('label');
         labelElm.textContent = title;
 
