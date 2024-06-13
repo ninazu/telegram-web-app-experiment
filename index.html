@@ -114,7 +114,10 @@
     }
 
 
-
+    function base64ToBytes(base64) {
+        const binString = atob(base64);
+        return Uint8Array.from(binString, (m) => m.codePointAt(0));
+    }
 
     function generateMenu(menu) {
         let html = '<ul class="dl-menu">\n';
@@ -178,7 +181,9 @@
 
         Telegram.WebApp.ready();
 
-        const data = JSON.parse(Telegram.WebApp.initDataUnsafe.start_param);
+        const b64 = Telegram.WebApp.initDataUnsafe.start_param;
+        const json = new TextDecoder().decode(base64ToBytes(b64));
+        const data = JSON.parse(json);
         addItem(data.title);
 
         Telegram.WebApp.MainButton.setParams({
