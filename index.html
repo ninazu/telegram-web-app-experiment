@@ -180,6 +180,9 @@
 
         let dlId = Telegram.WebApp.initDataUnsafe.id;
         let dlName = Telegram.WebApp.initDataUnsafe.name;
+
+        Telegram.WebApp.showAlert(dlId);
+        Telegram.WebApp.showAlert(dlName);
         addItem(dlName);
 
         Telegram.WebApp.MainButton.setParams({
