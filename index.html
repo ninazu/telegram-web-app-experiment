@@ -113,17 +113,7 @@
         checkout.appendChild(rowElm);
     }
 
-    Telegram.WebApp.ready();
 
-    let startParam = Telegram.WebApp.initDataUnsafe.start_param;
-    addItem(startParam);
-
-    Telegram.WebApp.MainButton.setParams({
-        text: 'Завершити замовлення',
-        is_visible: true
-    }).onClick(function () {
-        Telegram.WebApp.close();
-    });
 
 
     function generateMenu(menu) {
@@ -158,6 +148,8 @@
     }
 
     $(function () {
+
+
         document.getElementById('menu-container').outerHTML = generateMenu(menuData.menu);
         // Отримуємо всі пункти меню
         const menuItems = document.querySelectorAll('.dl-menu li');
@@ -182,6 +174,18 @@
 
         $('#dl-menu').dlmenu({
             backLabel: "назад"
+        });
+
+        Telegram.WebApp.ready();
+
+        let startParam = Telegram.WebApp.initDataUnsafe.start_param;
+        addItem(startParam);
+
+        Telegram.WebApp.MainButton.setParams({
+            text: 'Завершити замовлення',
+            is_visible: true
+        }).onClick(function () {
+            Telegram.WebApp.close();
         });
     });
 </script>
