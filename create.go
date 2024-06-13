@@ -11,7 +11,7 @@ import (
 
 var botToken = flag.String("token", "", "Bot Token")
 var chatId = flag.Int64("chat", -1002200729105, "Bot Token")
-var botName = flag.String("chat", "kormy6hkaBot", "Bot Token")
+var botName = flag.String("botName", "kormy6hkaBot", "Bot Token")
 
 type ParseMode string
 
@@ -26,10 +26,10 @@ type ErrorResponse struct {
 	Description string `json:"description"`
 }
 
-func send(title string, id string) error {
+func send(image, title string, id string) error {
 	body, err := json.Marshal(map[string]any{
 		//"parse_mode": ModeHTML,
-		"text":    "тут має бути фотка",
+		"text":    image,
 		"chat_id": *chatId,
 		"reply_markup": map[string]interface{}{
 			"inline_keyboard": [][]map[string]interface{}{
@@ -82,7 +82,7 @@ func send(title string, id string) error {
 func main() {
 	flag.Parse()
 
-	if err := send("Черешня - Жовта", "1"); err != nil {
+	if err := send("https://eimg.pravda.com/images/doc/2/1/2106f80-cherry-1566779.jpg", "Черешня - Жовта", "1"); err != nil {
 		panic(err)
 	}
 	//send("Персик")

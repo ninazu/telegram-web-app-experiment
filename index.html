@@ -10,48 +10,8 @@
         function setThemeClass() {
             document.documentElement.className = Telegram.WebApp.colorScheme;
         }
-
-
-        function addItem(title) {
-            const labelElm = document.createElement('label');
-            labelElm.textContent = title;
-
-            const countElm = document.createElement('input');
-            countElm.type = 'number';
-            countElm.min = '0';
-            countElm.max = '100000';
-            countElm.placeholder = 'грам';
-
-            const removeElm = document.createElement('button');
-            removeElm.textContent = "X";
-            removeElm.onclick = function () {
-                rowElm.remove();
-            }
-
-            const rowElm = document.createElement('div');
-
-            rowElm.append(labelElm);
-            rowElm.append(countElm);
-            rowElm.append(removeElm);
-
-            checkout.appendChild(rowElm);
-        }
-
-
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
-
-        Telegram.WebApp.ready();
-
-        let startParam = Telegram.WebApp.initDataUnsafe.start_param;
-        addItem(startParam);
-
-        Telegram.WebApp.MainButton.setParams({
-            text: 'Завершити замовлення',
-            is_visible: true
-        }).onClick(function () {
-            Telegram.WebApp.close();
-        });
     </script>
 </head>
 <body>
@@ -119,6 +79,44 @@
         ]
     };
     const checkout = document.getElementById('checkout');
+
+    function addItem(title) {
+        const labelElm = document.createElement('label');
+        labelElm.textContent = title;
+
+        const countElm = document.createElement('input');
+        countElm.type = 'number';
+        countElm.min = '0';
+        countElm.max = '100000';
+        countElm.placeholder = 'грам';
+
+        const removeElm = document.createElement('button');
+        removeElm.textContent = "X";
+        removeElm.onclick = function () {
+            rowElm.remove();
+        }
+
+        const rowElm = document.createElement('div');
+
+        rowElm.append(labelElm);
+        rowElm.append(countElm);
+        rowElm.append(removeElm);
+
+        checkout.appendChild(rowElm);
+    }
+
+    Telegram.WebApp.ready();
+
+    let startParam = Telegram.WebApp.initDataUnsafe.start_param;
+    addItem(startParam);
+
+    Telegram.WebApp.MainButton.setParams({
+        text: 'Завершити замовлення',
+        is_visible: true
+    }).onClick(function () {
+        Telegram.WebApp.close();
+    });
+
 
     function generateMenu(menu) {
         let html = '<ul class="dl-menu">\n';
