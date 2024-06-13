@@ -11,10 +11,15 @@
             document.documentElement.className = Telegram.WebApp.colorScheme;
         }
 
+
         Telegram.WebApp.onEvent('themeChanged', setThemeClass);
         setThemeClass();
 
         Telegram.WebApp.ready();
+
+        let startParam = Telegram.WebApp.initDataUnsafe.start_param;
+        addItem(startParam);
+
         Telegram.WebApp.MainButton.setParams({
             text: 'Завершити замовлення',
             is_visible: true
@@ -114,13 +119,9 @@
         return html;
     }
 
-    function closeMenu(item) {
-        console.log(item);
-        $('#dl-menu').dlmenu("closeMenu");
-
-
+    function addItem(title) {
         const labelElm = document.createElement('label');
-        labelElm.textContent = item.textContent;
+        labelElm.textContent = title;
 
         const countElm = document.createElement('input');
         countElm.type = 'number';
@@ -141,6 +142,11 @@
         rowElm.append(removeElm);
 
         checkout.appendChild(rowElm);
+    }
+
+    function closeMenu(item) {
+        $('#dl-menu').dlmenu("closeMenu");
+        addItem(item.textContent);
     }
 
     $(function () {
